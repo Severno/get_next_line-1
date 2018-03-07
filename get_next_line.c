@@ -6,13 +6,15 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/02/07 07:51:06 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/03/07 20:50:29 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "get_next_line.h"
 
 int		get_next_line(const int fd, char **line)
 {
+	if (fd && line)
+		return(1);
 	return (0);
 }
