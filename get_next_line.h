@@ -6,12 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:54:15 by dhojt             #+#    #+#             */
-/*   Updated: 2018/02/08 12:02:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/03/07 20:18:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# include "libft.h"
 
 # define BUFF_SIZE 32
 
