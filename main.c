@@ -1,37 +1,16 @@
 #include "get_next_line.h"
+#include <fcntl.h>
 
 int		main(void)
 {
-	if (get_next_line(1, NULL))	
-		ft_putstr("Linked to gnl [1]\n");
-	else
-		ft_putstr("Linked to gnl [0]\n");
+	int		fd;
+	char	*line;
 
-	int		fildes;
-	int		fildes2;
-	int		fildes3;
+	fd = open("alphabet", O_RDONLY);
 
-	char	str[150];
-	char	str2[150];
-	char	str3[150];
+	get_next_line(fd, &line);
 
-	printf("TOP\n");
-	fildes = open("ann", O_RDONLY);
-	read(fildes, str, 100);
-	printf("%d = %s\n", fildes, str);
-
-	fildes2 = open("ann", O_RDONLY);
-	read(fildes2, str2, 100);
-	printf("%d = %s\n", fildes2, str2);
-
-	fildes3 = open("ann", O_RDONLY);
-	read(fildes3, str3, 100);
-	printf("%d = %s\n", fildes3, str3);
-
-	printf("BOTTOM\n");
-
-	close(fildes);
-	close(fildes2);
-	close(fildes3);
+	ft_putstr(line);
+	close(fd);
 	return (0);
 }
