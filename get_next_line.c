@@ -6,21 +6,33 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/03/25 15:05:13 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/03/25 15:25:33 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int		get_next_line(const int fd, char **line)
+static t_list	get_fd_live(int fd, t_list **fd_history)
 {
-	char	*str;
-	char	buf[BUFF_SIZE + 1];
-	int		read_result;
+	t_list	*tmp;
+
+	tmp = *fd_history;
+
+	while (fd_history)
+		if (content
+
+int				get_next_line(const int fd, char **line)
+{
+	char			buf[BUFF_SIZE + 1];
+	char			*str;
+	int				read_result;
+	static t_list	*fd_history;
+	t_list			*fd_live;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
+	fd_live = get_fd_live(fd, &fd_history);
 
 	str = ft_strnew(150);
 	read_result = BUFF_SIZE + 1;
