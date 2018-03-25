@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/03/25 15:38:36 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/03/25 15:42:03 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_list	*get_fd_live(int fd, t_list **fd_history)
 
 	while (fd_history)
 	{
-		if (tmp->content_size == fd)
+		if ((int)tmp->content_size == fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
