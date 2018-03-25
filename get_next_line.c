@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/03/08 11:48:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/03/25 15:05:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int		get_next_line(const int fd, char **line)
 	char	buf[BUFF_SIZE + 1];
 	int		read_result;
 
+	if (fd < 0 || line == NULL)
+		return (-1);
+
 	str = ft_strnew(150);
 	read_result = BUFF_SIZE + 1;
 	
@@ -26,11 +29,11 @@ int		get_next_line(const int fd, char **line)
 	while(read_result >= BUFF_SIZE)
 	{
 		read_result = read(fd, buf, BUFF_SIZE);
-		if (!(read_result < BUFF_SIZE))
+		//if (!(read_result < BUFF_SIZE))
 			str = ft_strjoin(str, buf);
-		else
-			str = ft_strjoin(str, buf);
-		printf("Read result is %d\n", read_result);
+		//else
+		//	str = ft_strjoin(str, buf);
+		//printf("Read result is %d\n", read_result);
 
 	}
 	ft_putstr("LOOP END\n");
