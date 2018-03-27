@@ -6,19 +6,12 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/03/27 17:54:02 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/03/27 18:10:43 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-
-static void		refil_buf(char *buf, char *content)
-{
-	if (buf || content)
-		;
-	ft_putstr(buf);
-}
 
 static t_list	*get_fd_live(int fd, t_list **fd_history)
 {
@@ -38,6 +31,7 @@ static t_list	*get_fd_live(int fd, t_list **fd_history)
 	}
 		ft_putstr("7\n");
 	tmp = ft_lstnew(NULL, fd);
+	tmp->content = ft_strnew(BUFF_SIZE + 1);
 		ft_putstr("8\n");
 	tmp->next = *fd_history;
 		ft_putstr("9\n");
@@ -60,7 +54,9 @@ int				get_next_line(const int fd, char **line)
 	ft_putstr("2\n");
 	fd_live = get_fd_live(fd, &fd_history);
 	ft_putstr("5\n");
-	refil_buf(buf, fd_live->content);
+	ft_strcpy(fd_live->content, "Hello\n");
+	ft_strcpy(buf, fd_live->content);
+	ft_putstr(buf);
 
 	str = ft_strnew(150);
 	read_result = BUFF_SIZE + 1;
