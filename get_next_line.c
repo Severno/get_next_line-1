@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/03/27 18:10:43 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/03/28 00:12:48 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ static t_list	*get_fd_live(int fd, t_list **fd_history)
 	tmp = ft_lstnew(NULL, fd);
 	tmp->content = ft_strnew(BUFF_SIZE + 1);
 		ft_putstr("8\n");
-	tmp->next = *fd_history;
+	ft_lstadd(fd_history, tmp);
 		ft_putstr("9\n");
-	*fd_history = tmp;
-		ft_putstr("10\n");
 	return(tmp);
 }
 
