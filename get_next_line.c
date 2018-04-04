@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/03/28 00:12:48 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/04 20:37:55 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,20 @@
 static t_list	*get_fd_live(int fd, t_list **fd_history)
 {
 	t_list	*tmp;
-	ft_putstr("3\n");
 
+	if (!fd_history)
+		return (NULL);
 	tmp = *fd_history;
-	ft_putstr("4\n");
 
 	while (tmp)
 	{
-		ft_putstr("5\n");
 		if ((int)tmp->content_size == fd)
 			return (tmp);
 		tmp = tmp->next;
-		ft_putstr("6\n");
 	}
-		ft_putstr("7\n");
 	tmp = ft_lstnew(NULL, fd);
 	tmp->content = ft_strnew(BUFF_SIZE + 1);
-		ft_putstr("8\n");
 	ft_lstadd(fd_history, tmp);
-		ft_putstr("9\n");
 	return(tmp);
 }
 
@@ -46,30 +41,15 @@ int				get_next_line(const int fd, char **line)
 	static t_list	*fd_history;
 	t_list			*fd_live;
 
-	ft_putstr("1\n");
-	if (fd < 0 || line == NULL)
+	read_result = 0;
+	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
 		return (-1);
-	ft_putstr("2\n");
-	fd_live = get_fd_live(fd, &fd_history);
-	ft_putstr("5\n");
-	ft_strcpy(fd_live->content, "Hello\n");
-	ft_strcpy(buf, fd_live->content);
-	ft_putstr(buf);
 
-	str = ft_strnew(150);
-	read_result = BUFF_SIZE + 1;
-
-	ft_putstr("LOOP START\n");
 	while(read_result >= BUFF_SIZE)
 	{
 		read_result = read(fd, buf, BUFF_SIZE);
-		//if (!(read_result < BUFF_SIZE))
 			str = ft_strjoin(str, buf);
-		//else
-		//	str = ft_strjoin(str, buf);
-		//printf("Read result is %d\n", read_result);
 	}
-	ft_putstr("LOOP END\n");
 
 	*line = str;
 	return (0);
