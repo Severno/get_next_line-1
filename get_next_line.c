@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/04 20:37:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/04 21:25:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				get_next_line(const int fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
 	char			*str;
+	char			*tmp;
 	int				read_result;
 	static t_list	*fd_history;
 	t_list			*fd_live;
@@ -44,6 +45,12 @@ int				get_next_line(const int fd, char **line)
 	read_result = 0;
 	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
 		return (-1);
+	while (read_result != 0)
+	{
+		read_result = read(fd, buf, BUFF_SIZE);
+		tmp = fd_live->content;
+		fd_live->content = ft_strjoin(fd_live->content, buf);
+	}
 
 	while(read_result >= BUFF_SIZE)
 	{
