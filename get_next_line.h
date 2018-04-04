@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:54:15 by dhojt             #+#    #+#             */
-/*   Updated: 2018/03/26 12:33:36 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/04 14:58:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define BUFF_SIZE	3
 
 # define ENDL		'\n'
+# define ENDF		-1
 
 int		get_next_line(const int fd, char **line);
 
