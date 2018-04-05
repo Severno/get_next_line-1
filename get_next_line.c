@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/05 15:52:01 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 16:30:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ static void			join_free(char *content, char *buf)
 {
 	char	*tmp;
 
+	//JOIN_FREE
+	printf("\n***   JOIN_FREE   ***\n");
+	
 	tmp = content;
 	content = ft_strjoin(content, buf);
 	free(tmp);
+	printf("***   END   ***\n\n");
 }
 
 static void		split_new_line(char *content, char *str)
@@ -27,7 +31,7 @@ static void		split_new_line(char *content, char *str)
 	char		*tmp;
 
 	//SPLIT NEW LINE
-	printf("***Split new line***\n");
+	printf("\n***   SPLIT_NEW_LINE   ***\n");
 	
 	//IF CONTENT FAIL CHECK
 	if (content)
@@ -49,6 +53,7 @@ static void		split_new_line(char *content, char *str)
 		
 		printf(" 5\n");
 		tmp = NULL;
+		printf("***   END   ***\n\n");
 	}
 }
 
@@ -104,7 +109,7 @@ int				get_next_line(const int fd, char **line)
 		printf("READ FROM BUFFER\n");
 
 			//BUFFER READ INFO
-			printf("Read %d characters reading: %s\n\n", read_result, buf);
+			printf("Read %d characters reading: %s\n", read_result, buf);
 
 			//DOES THE READING FAIL?
 			printf("DOES TH READING FAIL?\n");
@@ -114,14 +119,14 @@ int				get_next_line(const int fd, char **line)
 
 			//DID THE BUFFER READ A \n?
 			printf("DID THE BUFFER READ A \\n");
-			if (ft_strchr(buf, '\n' || read_result < 0))
+			if (ft_strchr(buf, '\n') || read_result < 0)
 			{
 				//YES
-				printf(" YES\n");
+				printf("   -   YES\n");
 				break ;
 			}
 			//NO
-			printf(" NO\n");
+			printf("   -   NO\n");
 
 			//JOIN BUF TO CONTENT
 			printf("JOIN BUF TO CONTENT\n");
