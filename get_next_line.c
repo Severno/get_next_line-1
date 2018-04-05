@@ -6,12 +6,15 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/05 09:31:10 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 14:35:40 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+
+static void		split_new_line(char *content, char *str)
+{
+
 
 static t_list	*get_fd_live(int fd, t_list **fd_history)
 {
@@ -43,21 +46,35 @@ int				get_next_line(const int fd, char **line)
 	t_list			*fd_live;
 
 	read_result = 0;
+
+	//HANDLE FAILS && DISCOVER FD
 	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
 		return (-1);
+
+
+	//IDENTIFY IF CONTENT HAS \n
 	if (!(ft_strchr(fd_live->content, ENDL)))
 	{
-		while ((read_result = read(fd, buf, BUFF_SIZE)))
+
+
+		//READ FROM BUFFER
+		while ((read_result = read(fd, buf, BUFF_SIZE)) > 0)
 		{
+			
+			//DOES THE READING FAIL?
 			if (read_result < 0)
 				return -1;
-			read_result = read(fd, buf, BUFF_SIZE);
-			tmp = fd_live->content;
-			fd_live->content = ft_strjoin(fd_live->content, buf);
-			if (ft_strchr(fd_live->content, '\n'))
+
+
+			//DID THE BUFFER READ A \n?
+			if (ft_strchr(buf, '\n' || read_result < 0))
 				break ;
+
+
+			//JOIN BUF TO FD LIVE
+			str = JOIN(fd_live->content, buf);
 		}
 	}
-	fd_liveft_strsplitfirst(fd_live->content, ENDL)
+	str = ft_strsplitfirst(fd_live->content, ENDL);
 	return (0);
 }
