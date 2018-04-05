@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/05 22:11:19 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/06 01:45:50 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char		*join_free(char *content, char *buf)
 	return (content);
 }
 
-static void		split_new_line(char *content, char *str)
+static void		split_new_line(char **content, char **str)
 {
 	//SPLIT NEW LINE
 	printf("\n***   SPLIT_NEW_LINE   ***\n");
@@ -38,12 +38,13 @@ static void		split_new_line(char *content, char *str)
 
 
 		printf(" 1\n");
-		str = ft_strdup(content);
+		*str = ft_strdup(*content);
+		*(ft_strchr(*str, ENDL)) = '\0';
 			
 		printf(" 2\n");
-		content = ft_strdup(ft_strchr(content, ENDL) + 1);
-		printf("### CONTENT IS: %s$\n", content);
-		printf("### STRING IS: %s$\n", str);
+		*content = ft_strdup(ft_strchr(*content, ENDL) + 1);
+		printf("### CONTENT IS: %s$\n", *content);
+		printf("### STRING IS: %s$\n", *str);
 		
 		printf("***   END   ***\n\n");
 	}
@@ -138,12 +139,14 @@ int				get_next_line(const int fd, char **line)
 	
 	//SPLIT AT \n
 	printf("SPLIT AT \\n\n");
-	split_new_line(fd_live->content, str);
+	split_new_line((char **)&fd_live->content, &str);
 
 	//FINAL CONTENT IS
 	printf("### FINAL CONTENT IS: %s$\n", fd_live->content);
 	
 	//FINAL STRING IS
 	printf("### RETURNED STRING IS: %s$\n", str);
-	return (0);
+	printf("\n\n\n\n\n\n\n");
+	*line = str;
+	return (1);
 }
