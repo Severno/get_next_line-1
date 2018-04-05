@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/04 21:25:54 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 09:31:10 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ int				get_next_line(const int fd, char **line)
 	read_result = 0;
 	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
 		return (-1);
-	while (read_result != 0)
+	if (!(ft_strchr(fd_live->content, ENDL)))
 	{
-		read_result = read(fd, buf, BUFF_SIZE);
-		tmp = fd_live->content;
-		fd_live->content = ft_strjoin(fd_live->content, buf);
+		while ((read_result = read(fd, buf, BUFF_SIZE)))
+		{
+			if (read_result < 0)
+				return -1;
+			read_result = read(fd, buf, BUFF_SIZE);
+			tmp = fd_live->content;
+			fd_live->content = ft_strjoin(fd_live->content, buf);
+			if (ft_strchr(fd_live->content, '\n'))
+				break ;
+		}
 	}
-
-	while(read_result >= BUFF_SIZE)
-	{
-		read_result = read(fd, buf, BUFF_SIZE);
-			str = ft_strjoin(str, buf);
-	}
-
-	*line = str;
+	fd_liveft_strsplitfirst(fd_live->content, ENDL)
 	return (0);
 }
