@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/05 22:09:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 22:11:19 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int				get_next_line(const int fd, char **line)
 	fd_live->content = join_free(fd_live->content, buf);
 
 	//CONTENT IS:
-	printf("FINAL CONTENT IS %s$\n", fd_live->content);
+	printf("CONTENT IS %s$\n", fd_live->content);
 	
 	//SPLIT AT \n
 	printf("SPLIT AT \\n\n");
