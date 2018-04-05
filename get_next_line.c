@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/05 16:30:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 17:20:09 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_list	*get_fd_live(int fd, t_list **fd_history)
 		tmp = tmp->next;
 	}
 	tmp = ft_lstnew(NULL, fd);
-	tmp->content = ft_strnew(BUFF_SIZE + 1);
+	tmp->content = ft_strnew(1);
 	ft_lstadd(fd_history, tmp);
 	//FD DISCOVERED
 	printf("FD DISCOVERED\n");
@@ -95,7 +95,8 @@ int				get_next_line(const int fd, char **line)
 	printf("DISCOVER FD\n");	
 	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
 		return (-1);
-
+	
+	//ALLOCATE CONTENT
 
 	//IDENTIFY IF CONTENT HAS \n
 	printf("IDENTIFY IF CONTENT HAS \\n\n");
@@ -130,7 +131,10 @@ int				get_next_line(const int fd, char **line)
 
 			//JOIN BUF TO CONTENT
 			printf("JOIN BUF TO CONTENT\n");
-			join_free(fd_live->content, buf);
+			fd_live->content = join_free(fd_live->content, buf);
+
+			//CONTENT IS:
+			printf("Content is %s$\n", fd_live->content);
 		}
 	}
 	//JOIN BUF TO FD LIVE FINAL
