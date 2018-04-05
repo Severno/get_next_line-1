@@ -6,14 +6,14 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/05 17:20:09 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 22:09:21 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-static void			join_free(char *content, char *buf)
+static char		*join_free(char *content, char *buf)
 {
 	char	*tmp;
 
@@ -24,12 +24,11 @@ static void			join_free(char *content, char *buf)
 	content = ft_strjoin(content, buf);
 	free(tmp);
 	printf("***   END   ***\n\n");
+	return (content);
 }
 
 static void		split_new_line(char *content, char *str)
 {
-	char		*tmp;
-
 	//SPLIT NEW LINE
 	printf("\n***   SPLIT_NEW_LINE   ***\n");
 	
@@ -40,19 +39,12 @@ static void		split_new_line(char *content, char *str)
 
 		printf(" 1\n");
 		str = ft_strdup(content);
-		
-		
+			
 		printf(" 2\n");
-		tmp = content;
+		content = ft_strdup(ft_strchr(content, ENDL) + 1);
+		printf("### CONTENT IS: %s$\n", content);
+		printf("### STRING IS: %s$\n", str);
 		
-		printf(" 3\n");
-		str = ft_strdup(ft_strchr(content, ENDL) + 1);
-		
-		printf(" 4\n");
-		free(tmp);
-		
-		printf(" 5\n");
-		tmp = NULL;
 		printf("***   END   ***\n\n");
 	}
 }
@@ -139,6 +131,19 @@ int				get_next_line(const int fd, char **line)
 	}
 	//JOIN BUF TO FD LIVE FINAL
 	printf("JOIN BUF TO FD LIVE FINAL\n");
+	fd_live->content = join_free(fd_live->content, buf);
+
+	//CONTENT IS:
+	printf("FINAL CONTENT IS %s$\n", fd_live->content);
+	
+	//SPLIT AT \n
+	printf("SPLIT AT \\n\n");
 	split_new_line(fd_live->content, str);
+
+	//FINAL CONTENT IS
+	printf("### FINAL CONTENT IS: %s$\n", fd_live->content);
+	
+	//FINAL STRING IS
+	printf("### RETURNED STRING IS: %s$\n", str);
 	return (0);
 }
