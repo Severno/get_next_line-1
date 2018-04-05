@@ -7,8 +7,11 @@ int		main(void)
 	char	*line;
 
 	fd = open("alphabet", O_RDONLY);
-	get_next_line(fd, &line);
-	ft_putstr(line);
+	while ((get_next_line(fd, &line)) == 1)
+	{
+		ft_putstr(line);
+		ft_putchar('\n');
+	}
 	close(fd);
 	return (0);
 }
