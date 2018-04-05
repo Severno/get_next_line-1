@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 15:39:39 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/03 16:37:47 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 02:53:33 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char			*ft_strtrim(char const *s);
 char			*ft_strtrimselect(char const *s, char c);
 char			*ft_removeselect(const char *s, char c);
 char			**ft_strsplit(char const *s, char c);
+char			*ft_strsplitfirst(char *str, char c);
 
 typedef struct	s_list
 {
