@@ -6,12 +6,21 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/05 15:17:56 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/05 15:52:01 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
+static void			join_free(char *content, char *buf)
+{
+	char	*tmp;
+
+	tmp = content;
+	content = ft_strjoin(content, buf);
+	free(tmp);
+}
 
 static void		split_new_line(char *content, char *str)
 {
@@ -77,8 +86,8 @@ int				get_next_line(const int fd, char **line)
 	read_result = 0;
 
 	//HANDLE FAILS && DISCOVER FD
-	printf("LOOKING FOR FAILS\n");	
-	printf("IDENTIFY FD\n");	
+	printf("HANDLE FAILS\n");	
+	printf("DISCOVER FD\n");	
 	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
 		return (-1);
 
@@ -89,30 +98,38 @@ int				get_next_line(const int fd, char **line)
 	{
 
 
-		//READ FROM BUFFER
-		printf("Read from buffer\n");
 		while ((read_result = read(fd, buf, BUFF_SIZE)) > 0)
 		{
+		//READ FROM BUFFER
+		printf("READ FROM BUFFER\n");
+
+			//BUFFER READ INFO
+			printf("Read %d characters reading: %s\n\n", read_result, buf);
 
 			//DOES THE READING FAIL?
-			printf("Check if reading fails\n");
+			printf("DOES TH READING FAIL?\n");
 			if (read_result < 0)
 				return -1;
 
 
 			//DID THE BUFFER READ A \n?
-			printf("Check if buffer read a \\n\n");
+			printf("DID THE BUFFER READ A \\n");
 			if (ft_strchr(buf, '\n' || read_result < 0))
+			{
+				//YES
+				printf(" YES\n");
 				break ;
+			}
+			//NO
+			printf(" NO\n");
 
-
-			//JOIN BUF TO FD LIVE
-			printf("Joining buf to content\n");
-			split_new_line(fd_live->content, str);
+			//JOIN BUF TO CONTENT
+			printf("JOIN BUF TO CONTENT\n");
+			join_free(fd_live->content, buf);
 		}
 	}
 	//JOIN BUF TO FD LIVE FINAL
-	printf("Joining buf to content final\n");
+	printf("JOIN BUF TO FD LIVE FINAL\n");
 	split_new_line(fd_live->content, str);
 	return (0);
 }
