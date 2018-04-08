@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/06 01:45:50 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/08 19:57:34 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,19 @@ static t_list	*get_fd_live(int fd, t_list **fd_history)
 	while (tmp)
 	{
 		if ((int)tmp->content_size == fd)
+		{
+			//RETURNING OLD FD
+			printf("RETURNING OLD FD");
 			return (tmp);
+		}
 		tmp = tmp->next;
 	}
 	tmp = ft_lstnew(NULL, fd);
 	tmp->content = ft_strnew(1);
+	tmp->content_size = fd;
 	ft_lstadd(fd_history, tmp);
-	//FD DISCOVERED
-	printf("FD DISCOVERED\n");
+	//NEW DISCOVERED FD
+	printf("NEW DISCOVERED FD [%d]\n", fd);
 	return(tmp);
 }
 
