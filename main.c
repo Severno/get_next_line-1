@@ -1,5 +1,6 @@
 #include "get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 int		main(void)
 {
@@ -7,6 +8,9 @@ int		main(void)
 	//int		fd2;
 	char	*line1;
 	//char	*line2;
+	int i;
+
+	i = 0;
 
 	fd1 = open("alphabet", O_RDONLY);
 	//fd2 = open("ann", O_RDONLY);
@@ -16,29 +20,9 @@ int		main(void)
 		{
 			ft_putstr(line2);
 			ft_putchar('\n');
+			ft_putchar('\n');
 		}*/
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putstr(line1);
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
+		printf("LINE %d: [%s] END\n", i++, line1);
 	}
 	close(fd1);
 	//close(fd2);
