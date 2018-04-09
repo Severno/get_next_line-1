@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/08 19:57:34 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/09 02:46:17 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ int				get_next_line(const int fd, char **line)
 	int				read_result;
 	static t_list	*fd_history;
 	t_list			*fd_live;
+	int				ret;
+
+	ret = 1;
 
 	str = NULL;
 	read_result = 0;
@@ -144,7 +147,14 @@ int				get_next_line(const int fd, char **line)
 	
 	//SPLIT AT \n
 	printf("SPLIT AT \\n\n");
-	split_new_line((char **)&fd_live->content, &str);
+
+	if (!read_result && !ft_strchr(fd_live->content, ENDL))
+	{
+		*line = ft_strdup(fd_live->content);
+		return (0);
+	}
+	else
+		split_new_line((char **)&fd_live->content, &str);
 
 	//FINAL CONTENT IS
 	printf("### FINAL CONTENT IS: %s$\n", fd_live->content);
