@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/09 20:19:54 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/10 02:22:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,21 @@ int				get_next_line(const int fd, char **line)
 	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
 		return (-1);
 	
-	if (!(ft_strchr(fd_live->content, ENDL)))
+	//if (!(ft_strchr(fd_live->content, ENDL)))
 	{
 
 
-		while ((read_result = read(fd, buf, BUFF_SIZE)) > 0)
+		while ((read_result = read(fd, buf, BUFF_SIZE)))//Check while val is 0
 		{
-			if (read_result < 0)
-				return -1;
-			if (ft_strchr(buf, '\n') || read_result < 0)
+			if(!(fd_live->content = join_free(fd_live->content, buf)))
+				return (NULL);
+			if (ft_strchr(buf, '\n'))
 			{
 				break ;
 			}
-			fd_live->content = join_free(fd_live->content, buf);
 
 		}
 	}
-	fd_live->content = join_free(fd_live->content, buf);
 
 	if (!read_result && !ft_strchr(fd_live->content, ENDL))
 	{
