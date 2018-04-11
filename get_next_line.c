@@ -6,62 +6,62 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/11 09:07:44 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/11 16:29:06 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*char	*ft_strjoinch(char const *s1, char c)
-{
-	char	*new_str;
-	size_t	i;
-	size_t	s1_len;
-
-	if (!s1 || !c)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	new_str = ft_strnew(s1_len + 1);
-	if (!new_str)
-		return (NULL);
-	i = -1;
-	while (++i < s1_len)
-		*(new_str + i) = *(s1 + i);
-	*(new_str + i) = c;
-	return (new_str);
-}*/
-
-/*int			ft_strcopychr(char **dst, char *src, char c)
+char	*line_join(char const *line, char c)
 {
 	int		i;
-	int		count;
-	int		pos;
+	int		len;
+	char	*new;
 
-	i = -1;
-	count = 0;
-	while (src[++i])
-		if (src[i] == c)
-			break ;
-	pos = i;
-	if (!(*dst = ft_strnew(i)))
-		return (0);
-	while (src[count] && count < i)
+	i = 0;
+	if (line && c)
 	{
-		if (!(*dst = ft_strjoinch(*dst, src[count])))
-			return (0);
-		count++;
+		len = ft_strlen(line);
+		if (!(new = ft_strnew(len + 1)))
+			return (NULL);
+		while (i < len)
+		{
+			new[i] = line[i];
+			i++;
+		}
+		new[i] = c;
+		return (new);
 	}
-	return (pos);
-}*/
+	return (NULL);
+}
 
-static t_list	*get_fd_live(int fd, t_list **fd_history)
+int			line_copy(char **line, char *content, char c)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (content[i] && content[i] != c)
+		i++;
+	if (!(*line = ft_strnew(i)))
+		return (0);
+	while (content[j] && j < i)
+	{
+		if (!(*line = line_join(*line, content[j])))
+			return (0);
+		j++;
+	}
+	return (i);
+}
+
+t_list	*get_live(int fd, t_list **hist)
 {
 	t_list	*tmp;
 
-	if (!fd_history)
+	if (!hist)
 		return (NULL);
-	tmp = *fd_history;
-
+	tmp = *hist;
 	while (tmp)
 	{
 		if ((int)tmp->content_size == fd)
@@ -73,44 +73,36 @@ static t_list	*get_fd_live(int fd, t_list **fd_history)
 	tmp = ft_lstnew(NULL, fd);
 	tmp->content = ft_strnew(1);
 	tmp->content_size = fd;
-	ft_lstadd(fd_history, tmp);
-	return(tmp);
+	ft_lstadd(hist, tmp);
+	return (tmp);
 }
 
-int					get_next_line(const int fd, char **line)
+int		get_next_line(const int fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
-	char			*str;
 	int				read_result;
-	static t_list	*fd_history;
-	t_list			*fd_live;
-	int				ret;
+	static t_list	*hist;
+	t_list			*live;
 	int				i;
 
-	ret = 1;
-	str = NULL;
 	read_result = 0;
-
-	if ((fd < 0 || line == NULL) || (!(fd_live = get_fd_live(fd, &fd_history))))
-		return (-1);
-	if (read(fd, buf, 0) < 0)
-		return (-1);
-	if(!(*line = ft_strnew(1)))
+	if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || !(*line = ft_strnew(1)) ||
+			(!(live = get_live(fd, &hist))))
 		return (-1);
 	while ((read_result = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[read_result] = '\0';
-		if (!(fd_live->content = ft_strjoin(fd_live->content, buf)))
-			return (-1);;
-		if (ft_strchr(buf, '\n'))
+		if (!(live->content = ft_strjoin(live->content, buf)))
+			return (-1);
+		if (ft_strchr(buf, ENDL))
 			break ;
 	}
-	if (read_result < BUFF_SIZE && !ft_strlen(fd_live->content))
+	if (!read_result && !ft_strlen(live->content))
 		return (0);
-	i = ft_strcopychr(line, fd_live->content, '\n');
-	if (i < (int)ft_strlen(fd_live->content))
-		fd_live->content += (i + 1);
+	i = line_copy(line, live->content, ENDL);
+	if (i < (int)ft_strlen(live->content))
+		live->content += (i + 1);
 	else
-		ft_strclr(fd_live->content);
+		ft_strclr(live->content);
 	return (1);
 }
