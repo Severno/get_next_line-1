@@ -6,21 +6,23 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/11 16:29:06 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/12 15:04:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*line_join(char const *line, char c)
+char	*line_join(char *line, char c)
 {
 	int		i;
 	int		len;
 	char	*new;
+	char	*tmp;
 
 	i = 0;
 	if (line && c)
 	{
+		tmp =  line;
 		len = ft_strlen(line);
 		if (!(new = ft_strnew(len + 1)))
 			return (NULL);
@@ -30,6 +32,7 @@ char	*line_join(char const *line, char c)
 			i++;
 		}
 		new[i] = c;
+		free(line);
 		return (new);
 	}
 	return (NULL);
@@ -39,9 +42,11 @@ int			line_copy(char **line, char *content, char c)
 {
 	int		i;
 	int		j;
+	char	*tmp;
 
 	i = 0;
 	j = 0;
+	tmp = *line;
 	while (content[i] && content[i] != c)
 		i++;
 	if (!(*line = ft_strnew(i)))
@@ -52,6 +57,7 @@ int			line_copy(char **line, char *content, char c)
 			return (0);
 		j++;
 	}
+	free (tmp);
 	return (i);
 }
 
