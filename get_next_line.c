@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/12 15:18:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/12 23:05:59 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*line_join(char *line, char c)
 	i = 0;
 	if (line && c)
 	{
-		tmp =  line;
+		tmp = line;
 		len = ft_strlen(line);
 		if (!(new = ft_strnew(len + 1)))
 			return (NULL);
@@ -38,7 +38,7 @@ char	*line_join(char *line, char c)
 	return (NULL);
 }
 
-int			line_copy(char **line, char *content, char c)
+int		line_copy(char **line, char *content, char c)
 {
 	int		i;
 	int		j;
@@ -57,7 +57,7 @@ int			line_copy(char **line, char *content, char c)
 			return (0);
 		j++;
 	}
-	free (tmp);
+	free(tmp);
 	return (i);
 }
 
@@ -71,14 +71,10 @@ t_list	*get_live(int fd, t_list **hist)
 	while (tmp)
 	{
 		if ((int)tmp->content_size == fd)
-		{
 			return (tmp);
-		}
 		tmp = tmp->next;
 	}
-	tmp = ft_lstnew(NULL, fd);
-	tmp->content = ft_strnew(1);
-	tmp->content_size = fd;
+	tmp = ft_lstnew("", fd);
 	ft_lstadd(hist, tmp);
 	return (tmp);
 }
