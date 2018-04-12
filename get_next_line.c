@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/12 15:04:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/12 15:18:30 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,22 @@ int		get_next_line(const int fd, char **line)
 	static t_list	*hist;
 	t_list			*live;
 	int				i;
+	char			*tmp;//
+	int				first;//
 
-	read_result = 0;
+	first = 0;
 	if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || !(*line = ft_strnew(1)) ||
 			(!(live = get_live(fd, &hist))))
 		return (-1);
 	while ((read_result = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[read_result] = '\0';
+		tmp = live->content;
 		if (!(live->content = ft_strjoin(live->content, buf)))
 			return (-1);
+		if (first)
+			free(tmp);
+		first++;
 		if (ft_strchr(buf, ENDL))
 			break ;
 	}
