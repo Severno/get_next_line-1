@@ -23,8 +23,11 @@ int		main(void)
 			ft_putchar('\n');
 		}*/
 		printf("LINE %d: [%s] END\n", i++, line1);
+		free(line1);
 	}
 	close(fd1);
 	//close(fd2);
+	while (1)
+		;
 	return (0);
 }
