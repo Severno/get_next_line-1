@@ -27,7 +27,5 @@ int		main(void)
 	}
 	close(fd1);
 	//close(fd2);
-	while (1)
-		;
 	return (0);
 }
