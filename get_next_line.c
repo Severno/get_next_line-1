@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/12 23:05:59 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/13 01:39:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,11 @@ int		get_next_line(const int fd, char **line)
 		return (0);
 	i = line_copy(line, live->content, ENDL);
 	if (i < (int)ft_strlen(live->content))
-		live->content += (i + 1);
+	{
+		tmp = live->content;
+		live->content = ft_strdup(&((live->content) [i + 1]));
+		free(tmp);
+	}
 	else
 		ft_strclr(live->content);
 	return (1);
