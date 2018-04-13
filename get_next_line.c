@@ -6,37 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/13 15:48:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/14 00:31:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*line_join(char *line, char c)
-{
-	int		i;
-	int		len;
-	char	*new;
-	char	*tmp;
-
-	i = 0;
-	if (line && c)
-	{
-		tmp = line;
-		len = ft_strlen(line);
-		if (!(new = ft_strnew(len + 1)))
-			return (NULL);
-		while (i < len)
-		{
-			new[i] = line[i];
-			i++;
-		}
-		free(line);
-		new[i] = c;
-		return (new);
-	}
-	return (NULL);
-}
 
 int		line_copy(char **line, char *content, char c)
 {
@@ -49,14 +23,8 @@ int		line_copy(char **line, char *content, char c)
 	tmp = *line;
 	while (content[i] && content[i] != c)
 		i++;
-	if (!(*line = ft_strnew(i)))
+	if(!(*line = ft_strndup(content, i)))
 		return (0);
-	while (content[j] && j < i)
-	{
-		if (!(*line = line_join(*line, content[j])))
-			return (0);
-		j++;
-	}
 	return (i);
 }
 
