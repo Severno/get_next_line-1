@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/13 11:45:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/13 13:53:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		line_copy(char **line, char *content, char c)
 		i++;
 	if (!(*line = ft_strnew(i)))
 		return (0);
-	//free(tmp);
 	while (content[j] && j < i)
 	{
 		if (!(*line = line_join(*line, content[j])))
@@ -82,18 +81,16 @@ t_list	*get_live(int fd, t_list **hist)
 int		get_next_line(const int fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
-	int				read_result;
+	size_t			read_result;
 	static t_list	*hist;
 	t_list			*live;
-	size_t			i;
-	char			*tmp;//
+	char			*tmp;
 
-	//if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || (!(live = get_live(fd, &hist))))
-	if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || /*!(*line = ft_strnew(1)) ||*/ (!(live = get_live(fd, &hist))))
+	if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || (!(live = get_live(fd, &hist))))
 		return (-1);
 	tmp = live->content;
 	live->content = ft_strdup(live->content);
-		free(tmp);
+	free(tmp);
 	while ((read_result = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[read_result] = '\0';
@@ -106,11 +103,11 @@ int		get_next_line(const int fd, char **line)
 	}
 	if (!read_result && !ft_strlen(live->content))
 		return (0);
-	i = line_copy(line, live->content, ENDL);
-	if (i < ft_strlen(live->content))
+	read_result = line_copy(line, live->content, ENDL);
+	if (read_result < ft_strlen(live->content))
 	{
 		tmp = live->content;
-		live->content = ft_strdup(&((live->content) [i + 1]));
+		live->content = ft_strdup(&((live->content)[read_result + 1]));
 		free(tmp);
 	}
 	else
