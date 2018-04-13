@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/14 00:31:47 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/14 00:37:02 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		line_copy(char **line, char *content, char c)
 	tmp = *line;
 	while (content[i] && content[i] != c)
 		i++;
-	if(!(*line = ft_strndup(content, i)))
+	if (!(*line = ft_strndup(content, i)))
 		return (0);
 	return (i);
 }
