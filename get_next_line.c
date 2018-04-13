@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/13 03:01:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/13 11:45:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		line_copy(char **line, char *content, char c)
 		i++;
 	if (!(*line = ft_strnew(i)))
 		return (0);
-	free(tmp);
+	//free(tmp);
 	while (content[j] && j < i)
 	{
 		if (!(*line = line_join(*line, content[j])))
@@ -85,30 +85,29 @@ int		get_next_line(const int fd, char **line)
 	int				read_result;
 	static t_list	*hist;
 	t_list			*live;
-	int				i;
+	size_t			i;
 	char			*tmp;//
-	int				first;//
 
-	first = 0;
-	if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || !(*line = ft_strnew(1)) ||
-			(!(live = get_live(fd, &hist))))
+	//if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || (!(live = get_live(fd, &hist))))
+	if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || /*!(*line = ft_strnew(1)) ||*/ (!(live = get_live(fd, &hist))))
 		return (-1);
+	tmp = live->content;
+	live->content = ft_strdup(live->content);
+		free(tmp);
 	while ((read_result = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[read_result] = '\0';
 		tmp = live->content;
 		if (!(live->content = ft_strjoin(live->content, buf)))
 			return (-1);
-		if (first)
-			free(tmp);
-		first++;
+		free(tmp);
 		if (ft_strchr(buf, ENDL))
 			break ;
 	}
 	if (!read_result && !ft_strlen(live->content))
 		return (0);
 	i = line_copy(line, live->content, ENDL);
-	if (i < (int)ft_strlen(live->content))
+	if (i < ft_strlen(live->content))
 	{
 		tmp = live->content;
 		live->content = ft_strdup(&((live->content) [i + 1]));
