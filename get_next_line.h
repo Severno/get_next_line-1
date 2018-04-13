@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:54:15 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/04 21:26:00 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/13 12:33:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 # define GET_NEXT_LINE_H
 # include "libft.h"
 
-# define BUFF_SIZE	3
+# define BUFF_SIZE	1
 
 # define ENDL		'\n'
-# define ENDF		-1
 
 int		get_next_line(const int fd, char **line);
 
