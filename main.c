@@ -2,8 +2,10 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int		main(void)
+int		main(int argc, char **argv)
 {
+	if (argc == 2)
+	{
 	int		fd1;
 	//int		fd2;
 	char	*line1;
@@ -12,7 +14,7 @@ int		main(void)
 
 	i = 0;
 
-	fd1 = open("alphabet", O_RDONLY);
+	fd1 = open(argv[1], O_RDONLY);
 	//fd2 = open("ann", O_RDONLY);
 	while ((get_next_line(fd1, &line1)) == 1)
 	{
@@ -27,5 +29,6 @@ int		main(void)
 	}
 	close(fd1);
 	//close(fd2);
+	}
 	return (0);
 }
