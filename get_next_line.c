@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/13 01:39:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/13 03:01:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*line_join(char *line, char c)
 			new[i] = line[i];
 			i++;
 		}
-		new[i] = c;
 		free(line);
+		new[i] = c;
 		return (new);
 	}
 	return (NULL);
@@ -51,13 +51,13 @@ int		line_copy(char **line, char *content, char c)
 		i++;
 	if (!(*line = ft_strnew(i)))
 		return (0);
+	free(tmp);
 	while (content[j] && j < i)
 	{
 		if (!(*line = line_join(*line, content[j])))
 			return (0);
 		j++;
 	}
-	free(tmp);
 	return (i);
 }
 
