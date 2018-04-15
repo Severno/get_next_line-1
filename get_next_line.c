@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/15 19:58:27 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/15 20:35:14 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		get_next_line(const int fd, char **line)
 		live->content = ft_strdup(&((live->content)[read_result + 1]));
 		free(tmp);
 	}
-	else		
+	else
 		tmp[0] = '\0';
 	return (1);
 }
