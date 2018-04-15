@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/15 17:17:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/15 19:58:27 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int		line_copy(char **line, char *content, char c)
 {
 	int		i;
-	int		j;
 	char	*tmp;
 
 	i = 0;
-	j = 0;
 	tmp = *line;
 	while (content[i] && content[i] != c)
 		i++;
@@ -48,7 +46,7 @@ t_list	*get_live(int fd, t_list **hist)
 
 int		my_read(const int fd, char **content)
 {
-	int		(read_result);
+	int		read_result;
 	char	*tmp;
 	char	buf[BUFF_SIZE + 1];
 
@@ -79,16 +77,16 @@ int		get_next_line(const int fd, char **line)
 	tmp = live->content;
 	read_result = my_read(fd, &tmp);
 	live->content = tmp;
-	if (!read_result && !ft_strlen(live->content))
+	if (!read_result && !*tmp)
 		return (0);
 	read_result = line_copy(line, live->content, ENDL);
-	if (read_result < ft_strlen(live->content))
+	tmp = live->content;
+	if (tmp[read_result] != '\0')
 	{
-		tmp = live->content;
 		live->content = ft_strdup(&((live->content)[read_result + 1]));
 		free(tmp);
 	}
-	else
-		ft_strclr(live->content);
+	else		
+		tmp[0] = '\0';
 	return (1);
 }
