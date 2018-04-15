@@ -14,7 +14,10 @@ int		main(int argc, char **argv)
 
 	fd1 = open(argv[1], O_RDONLY);
 	while ((get_next_line(fd1, &line1)) == 1)
+	{
 		ft_putstr(line1);
+		ft_putchar('\n');
+	}
 	close(fd1);
 	}
 	return (0);
