@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 15:37:45 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/12 01:45:10 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/15 20:25:21 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		len2 = ft_strlen(s2);
 		i = -1;
 		j = 0;
-		if (!(join_str = ft_strnew(len1 + len2)))
+		if (!(join_str = (char *)malloc(sizeof(char) * len1 + len2 + 1)))
 			return (NULL);
 		while (++i < len1)
 			join_str[i] = s1[i];
 		while (j < len2)
 			join_str[i++] = s2[j++];
+		join_str[i] = '\0';
 		return (join_str);
 	}
 	return (NULL);
