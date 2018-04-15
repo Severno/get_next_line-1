@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 07:49:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/04/15 12:15:01 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/15 17:17:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ int		get_next_line(const int fd, char **line)
 	if (read_result < ft_strlen(live->content))
 	{
 		tmp = live->content;
-		live->content = ft_strndup(&((live->content)[read_result + 1]), BUFF_SIZE);
+		live->content = ft_strdup(&((live->content)[read_result + 1]));
 		free(tmp);
 	}
 	else
-		free(live->content);
+		ft_strclr(live->content);
 	return (1);
 }
