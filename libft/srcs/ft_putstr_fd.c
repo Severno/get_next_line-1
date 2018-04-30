@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 15:36:53 by dhojt             #+#    #+#             */
-/*   Updated: 2018/01/27 15:36:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/04/19 17:45:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	while (*s)
-		ft_putchar_fd(*s++, fd);
+	int len;
+
+	len = ft_strlen(s);
+	write (fd, s, len);
 }
