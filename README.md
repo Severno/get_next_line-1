@@ -6,7 +6,7 @@
 25/25
 ***
 ### Challenge
-**Note** *This project is no longer updated. get_next_line is now part of [libft](https://github.com/davhojt/libft "libft, a 42 project"), my personal C library. See [get_next_line](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") inside libft. In the [libft version](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") you can jus use the function by including libft.a.*  
+**Note** *This project is no longer updated. get_next_line is now part of [libft](https://github.com/davhojt/libft "libft, a 42 project"), my personal C library. See [get_next_line](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") inside libft. In the [libft version](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") you can just use the function by including libft.a.*  
   
 To create a function which returns the next line from a file descriptor, each time the function is called, without losing the reading thread.  
   
