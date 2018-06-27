@@ -6,37 +6,57 @@
 25/25
 ***
 ### Challenge
-**Note** This project is no longer updated. get_next_line is now part of [libft] (https://github.com/davhojt/libft "libft, a 42 project"), my personal C library. See [libft] (https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft").
-To create a function which returns the next line from a file descriptor, each time it is called, without losing the reading thread.  
+**Note** *This project is no longer updated. get_next_line is now part of [libft](https://github.com/davhojt/libft "libft, a 42 project"), my personal C library. See [get_next_line](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") inside libft. In the [libft version](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") you can jus use the function by including libft.a.*  
+  
+To create a function which returns the next line from a file descriptor, each time the function is called, without losing the reading thread.  
 The project achieved bonus score for using just one static variable, and handling multiple file descriptors without losing thread of reading on any.  
   
 The project is very helpful for parsing excercises, in examples where there is one piece of data per line.  
-With a simple simple program, get_next_line can behave like `cat`.
+With a simple program, get_next_line can behave like `cat`.
 
-For example:
+For example: The following main:
+```c
+#include "get_next_line.h"
+#include <fcntl.h>
+
+int				main(int argc, char **argv)
+{
+	int			i;
+	int			fd;
+	char		*line;
+
+	if (argc == 2)
+	{
+		i = 0;
+		fd = open(argv[1], O_RDONLY);
+		while ((get_next_line(fd, &line)) == 1)
+		{
+			ft_putstr(line);
+			ft_putchar('\n');
+		}
+		close(fd);
+	}
+	return (0);
+}
 ```
-$> cat maps/sample.fillit
-....
-##..
-.#..
-.#..
-
-....
-####
-....
-....
-
-#...
-###.
-....
-....
-
-....
-##..
-.##.
-....
+The following would result from the above simple main:
+```console
+$> ./test_gnl ann
+Pink hair
+Orange dress
+Loves Monki
+Eestlane
+Normaalne
 ```
-The map above, should produce the following, where each tetrimino is assigned a chronological letter.
+```console
+$> cat ann
+Pink hair
+Orange dress
+Loves Monki
+Eestlane
+Normaalne
+```
+The above `cat`
 ```
 $> ./fillit maps/sample.fillit
 DDAA
@@ -59,6 +79,7 @@ It is possible to describe the same tertrimino in various ways. For exampe, each
 #... .#.. ..#. #... .#.. ..#.
 .... .... .... #... .#.. ..#.
 ```
+The project is limitted to a maximum of 5 functions of 25 lines each and must conform to 42's norm.  
 The program cannot leak. All errors must be handled carefully. In no way can the program quit in an unexpected manner (Segmentation fault, bus error, double free, etc).  
 Allowed functions are `exit`, `open`, `close`, `write`, `read`, `malloc` and `free`. Everything else is forbidden.
 
