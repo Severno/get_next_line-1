@@ -63,7 +63,7 @@ The function cannot leak. All errors must be handled carefully. In no way can th
 Allowed functions are `read`, `malloc` and `free`. Everything else is forbidden.
 
 ### Using the project
-The project must be submitted without a Makefile. To compile first run:
+The project must be submitted without both a Makefile and a main. A main has been supplied but you can use your own. To compile first run:
 ```console
 make -C libft/ fclean && make -C libft/
 ```
@@ -74,7 +74,7 @@ clang -Wall -Wextra -Werror -I libft/includes -o main.o -c main.c
 clang -o test_gnl main.o get_next_line.o -I libft/includes -L libft/ -lft
 ```
 
-This will compile **test_gnl**. Execute with a fillit map as a parameter.
+This will compile **test_gnl**. Execute with a file as a parameter. If you modify the main to call `get_next_line` with `fd` parameter set to 0, get_next_line will wait for input on `stdin`
 ```console
 ./test_gnl [input_file]
 ```
