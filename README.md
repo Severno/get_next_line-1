@@ -61,7 +61,7 @@ Normaalne
 The function must conform to 42's norm.  
 The function cannot leak. All errors must be handled carefully. In no way can the function quit in an unexpected manner (Segmentation fault, bus error, double free, etc).  
 Allowed functions are `read`, `malloc` and `free`. Everything else is forbidden.
-
+***
 ### Using the project
 The project must be submitted without both a Makefile and a main. A main has been supplied but you can use your own. To compile first run:
 ```console
