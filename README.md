@@ -6,13 +6,13 @@
 25/25
 ***
 ### Challenge
-**Note** *This project is no longer updated. get_next_line is now part of [libft](https://github.com/davhojt/libft "libft, a 42 project"), my personal C library. See [get_next_line](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") inside libft. In the [libft version](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") you can just use the function by including libft.a.*  
+**Note** *This project is no longer updated. get_next_line is now part of [libft](https://github.com/davhojt/libft "libft, a 42 project"), my personal C library. See [get_next_line](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") inside libft. In the [libft version](https://github.com/davhojt/libft/blob/master/srcs/libft/srcs/get_next_line.c "get_next_line, inside libft") you can use the function by including libft.a.*  
   
-To create a function which returns the next line from a file descriptor, each time the function is called, without losing the reading thread.  
+To create a function which returns the next line from a file descriptor each time the function is called, without losing the reading thread.  
   
 The project achieved bonus score for using just one static variable, and handling multiple file descriptors without losing thread of reading on any.  
   
-The project is very helpful for parsing excercises, in examples where there is one piece of data per line.  
+The project is very helpful for parsing exercises, in examples where there is one piece of data per line.  
 With a simple program, get_next_line can behave like `cat`.
 
 For example: The following main:
